@@ -7,9 +7,7 @@
 #import "TiProxy.h"
 
 @interface PaymentQueue : TiProxy {
-
-@private
-
 }
+-(void)addPayment:(id)arg;
 
 @end

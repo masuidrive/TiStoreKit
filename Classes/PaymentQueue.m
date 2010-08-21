@@ -6,11 +6,20 @@
  */
 
 #import "PaymentQueue.h"
-
+#import "Payment.h"
 #import "TiUtils.h"
+
+#import <StoreKit/StoreKit.h>
+
 
 @implementation PaymentQueue
 
+-(void)addPayment:(id)arg
+{
+	ENSURE_SINGLE_ARG_OR_NIL(arg, Payment);
+	Payment* payment = (Payment*)arg;
+	[[SKPaymentQueue defaultQueue] addPayment:payment.payment];
+}
 
 
 @end

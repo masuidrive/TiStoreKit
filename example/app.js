@@ -49,6 +49,12 @@ var PaymentTestSuite = (function() {
 	    jsUnity.assertions.assertEqual("jp.masuidrive.ti.storekit.example2", payment.product);
 	    payment.quantity = 12;
 	    jsUnity.assertions.assertEqual(12, payment.quantity);
+	},
+	testPaymentAddQueue: function() {
+	    var payment = StoreKit.createPayment();
+	    payment.product = "jp.masuidrive.ti.storekit.example2";
+	    payment.quantity = 12;
+	    StoreKit.paymentQueue.addPayment(payment);
 	}
     };
 })();

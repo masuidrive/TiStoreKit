@@ -53,6 +53,7 @@
 -(void)dealloc
 {
 	// release any resources that have been retained by the module
+	[paymentQueue release];
 	[super dealloc];
 }
 
@@ -90,8 +91,16 @@
 
 -(id)createPayment:(id)args
 {
-//	ENSURE_SINGLE_ARG_OR_NIL(args, NSDictionary);
+	//	ENSURE_SINGLE_ARG_OR_NIL(args, NSDictionary);
 	return [[[Payment alloc] _initWithPageContext:[self executionContext] args:args] autorelease];
+}
+
+-(id)paymentQueue
+{
+	if(paymentQueue==nil) {
+		paymentQueue = [[PaymentQueue alloc] init];
+	}
+	return paymentQueue;
 }
 
 @end
