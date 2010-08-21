@@ -90,8 +90,8 @@
 
 -(id)createPayment:(id)args
 {
-	ENSURE_SINGLE_ARG_OR_NIL(args, NSDictionary);
-	return [[[Payment alloc] initWithProperties:args] autorelease];
+//	ENSURE_SINGLE_ARG_OR_NIL(args, NSDictionary);
+	return [[[Payment alloc] _initWithPageContext:[self executionContext] args:args] autorelease];
 }
 
 @end

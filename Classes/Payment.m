@@ -11,11 +11,37 @@
 
 @implementation Payment
 
--(id)initWithProperties:(NSDictionary*)properties
+@synthesize payment;
+
+
+- (SKPayment*)payment
 {
-	if (self = [self init]) {
+	if(payment==nil) {
+		self.payment = [[[SKMutablePayment alloc] init] autorelease];
 	}
-	return self;
+	return [[payment retain] autorelease];
+}
+
+- (id)product
+{
+	return [[self.payment.productIdentifier retain] autorelease];
+}
+
+- (void)setProduct:(id)arg
+{
+	ENSURE_SINGLE_ARG_OR_NIL(arg, NSString);
+	self.payment.productIdentifier = arg;
+}
+
+- (id)product
+{
+	return [[self.payment.productIdentifier retain] autorelease];
+}
+
+- (void)setProduct:(id)arg
+{
+	ENSURE_SINGLE_ARG_OR_NIL(arg, NSString);
+	self.payment.productIdentifier = arg;
 }
 
 

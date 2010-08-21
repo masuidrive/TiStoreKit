@@ -4,15 +4,13 @@
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
-#import "TiProxy.h"
-#import <StoreKit/StoreKit.h>
 
-@interface Payment : TiProxy {
-	
-@private
-	SKMutablePayment* payment;
-}
-@property (nonatomic, retain) SKMutablePayment* payment;
+#import "PaymentQueue.h"
+
+#import "TiUtils.h"
+
+@implementation PaymentQueue
+
 
 
 @end

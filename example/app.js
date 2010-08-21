@@ -38,6 +38,17 @@ var PaymentTestSuite = (function() {
 	testCreatePayment: function() {
 	    var payment = StoreKit.createPayment();
 	    jsUnity.assertions.assertEqual("[object Payment]", payment.toString());
+	},
+	testPaymentProduct: function() {
+	    var payment = StoreKit.createPayment({product: "jp.masuidrive.ti.storekit.example1", quantity: 10});
+	    jsUnity.assertions.assertEqual("jp.masuidrive.ti.storekit.example1", payment.product);
+	},
+	testPaymentProductProperty: function() {
+	    var payment = StoreKit.createPayment();
+	    payment.product = "jp.masuidrive.ti.storekit.example2";
+	    jsUnity.assertions.assertEqual("jp.masuidrive.ti.storekit.example2", payment.product);
+	    payment.quantity = 12;
+	    jsUnity.assertions.assertEqual(12, payment.quantity);
 	}
     };
 })();

@@ -5,14 +5,11 @@
  * Please see the LICENSE included with this distribution for details.
  */
 #import "TiProxy.h"
-#import <StoreKit/StoreKit.h>
 
-@interface Payment : TiProxy {
-	
+@interface PaymentQueue : TiProxy {
+
 @private
-	SKMutablePayment* payment;
-}
-@property (nonatomic, retain) SKMutablePayment* payment;
 
+}
 
 @end
