@@ -9,6 +9,8 @@
 #import "TiHost.h"
 #import "TiUtils.h"
 
+#import "Payment.h"
+
 @implementation JpMasuidriveTiStorekitModule
 
 #pragma mark Internal
@@ -86,21 +88,10 @@
 
 #pragma Public APIs
 
--(id)example:(id)args
+-(id)createPayment:(id)args
 {
-	// example method
-	return @"hello world";
-}
-
--(id)exampleProp
-{
-	// example property getter
-	return @"hello world";
-}
-
--(void)exampleProp:(id)value
-{
-	// example property setter
+	ENSURE_SINGLE_ARG_OR_NIL(args, NSDictionary);
+	return [[[Payment alloc] initWithProperties:args] autorelease];
 }
 
 @end

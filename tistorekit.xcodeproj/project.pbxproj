@@ -24,8 +24,11 @@
 /* Begin PBXBuildFile section */
 		24DD6CF91134B3F500162E58 /* JpMasuidriveTiStorekitModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* JpMasuidriveTiStorekitModule.h */; };
 		24DD6CFA1134B3F500162E58 /* JpMasuidriveTiStorekitModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* JpMasuidriveTiStorekitModule.m */; };
-    24DE9E1111C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h */; };
-    24DE9E1211C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m */; };
+		24DE9E1111C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h */; };
+		24DE9E1211C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m */; };
+		5951574F12204BA50059B0F3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5951574E12204BA50059B0F3 /* StoreKit.framework */; };
+		59DCC21912205B87007EDC2E /* Payment.h in Headers */ = {isa = PBXBuildFile; fileRef = 59DCC21712205B87007EDC2E /* Payment.h */; };
+		59DCC21A12205B87007EDC2E /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = 59DCC21812205B87007EDC2E /* Payment.m */; };
 		AA747D9F0F9514B9006C5449 /* JpMasuidriveTiStorekit_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* JpMasuidriveTiStorekit_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -35,7 +38,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D /* tistorekit */;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = tistorekit;
 		};
 /* End PBXContainerItemProxy section */
@@ -44,8 +47,11 @@
 		24DD6CF71134B3F500162E58 /* JpMasuidriveTiStorekitModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JpMasuidriveTiStorekitModule.h; path = Classes/JpMasuidriveTiStorekitModule.h; sourceTree = "<group>"; };
 		24DD6CF81134B3F500162E58 /* JpMasuidriveTiStorekitModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JpMasuidriveTiStorekitModule.m; path = Classes/JpMasuidriveTiStorekitModule.m; sourceTree = "<group>"; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
-    24DE9E0F11C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JpMasuidriveTiStorekitModuleAssets.h; path = Classes/JpMasuidriveTiStorekitModuleAssets.h; sourceTree = "<group>"; };
-    24DE9E1011C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JpMasuidriveTiStorekitModuleAssets.m; path = Classes/JpMasuidriveTiStorekitModuleAssets.m; sourceTree = "<group>"; };
+		24DE9E0F11C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JpMasuidriveTiStorekitModuleAssets.h; path = Classes/JpMasuidriveTiStorekitModuleAssets.h; sourceTree = "<group>"; };
+		24DE9E1011C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JpMasuidriveTiStorekitModuleAssets.m; path = Classes/JpMasuidriveTiStorekitModuleAssets.m; sourceTree = "<group>"; };
+		5951574E12204BA50059B0F3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		59DCC21712205B87007EDC2E /* Payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Payment.h; path = Classes/Payment.h; sourceTree = "<group>"; };
+		59DCC21812205B87007EDC2E /* Payment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Payment.m; path = Classes/Payment.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* JpMasuidriveTiStorekit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JpMasuidriveTiStorekit_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libJpMasuidriveTiStorekit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJpMasuidriveTiStorekit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+				5951574F12204BA50059B0F3 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+				5951574E12204BA50059B0F3 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -93,8 +101,10 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-        24DE9E0F11C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h */,
-        24DE9E1011C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m */,
+				59DCC21712205B87007EDC2E /* Payment.h */,
+				59DCC21812205B87007EDC2E /* Payment.m */,
+				24DE9E0F11C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h */,
+				24DE9E1011C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* JpMasuidriveTiStorekitModule.h */,
 				24DD6CF81134B3F500162E58 /* JpMasuidriveTiStorekitModule.m */,
 			);
@@ -119,7 +129,8 @@
 			files = (
 				AA747D9F0F9514B9006C5449 /* JpMasuidriveTiStorekit_Prefix.pch in Headers */,
 				24DD6CF91134B3F500162E58 /* JpMasuidriveTiStorekitModule.h in Headers */,
-        24DE9E1111C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h in Headers */,
+				24DE9E1111C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h in Headers */,
+				59DCC21912205B87007EDC2E /* Payment.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +195,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				24DD6CFA1134B3F500162E58 /* JpMasuidriveTiStorekitModule.m in Sources */,
-        24DE9E1211C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m in Sources */,
+				24DE9E1211C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m in Sources */,
+				59DCC21A12205B87007EDC2E /* Payment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
