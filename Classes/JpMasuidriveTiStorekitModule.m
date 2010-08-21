@@ -87,18 +87,37 @@
 	}
 }
 
+
+#pragma mark Delegates
+
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+{
+	NSLog(@"> paymentQueue:updatedTransactions:transactions");
+	// TODO
+}
+
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+	NSLog(@"> paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue");
+}
+
+
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
+{
+	NSLog(@"> paymentQueue:restoreCompletedTransactionsFailedWithError:");
+}
+
 #pragma Public APIs
 
 -(id)createPayment:(id)args
 {
-	//	ENSURE_SINGLE_ARG_OR_NIL(args, NSDictionary);
 	return [[[Payment alloc] _initWithPageContext:[self executionContext] args:args] autorelease];
 }
 
 -(id)paymentQueue
 {
 	if(paymentQueue==nil) {
-		paymentQueue = [[PaymentQueue alloc] init];
+		paymentQueue = [[PaymentQueue alloc] initWithTransactionObserver:self];
 	}
 	return paymentQueue;
 }

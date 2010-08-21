@@ -35,6 +35,9 @@ var PaymentTestSuite = (function() {
     var StoreKit = require("jp.masuidrive.ti.storekit");
     return {
 	suiteName: "Payment Test Suite",
+	testCanMakePayments: function() {
+	    jsUnity.assertions.assertEqual(false, StoreKit.paymentQueue.canMakePayments);
+	},
 	testCreatePayment: function() {
 	    var payment = StoreKit.createPayment();
 	    jsUnity.assertions.assertEqual("[object Payment]", payment.toString());

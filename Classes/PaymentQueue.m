@@ -14,6 +14,22 @@
 
 @implementation PaymentQueue
 
+-(id)initWithTransactionObserver:(id < SKPaymentTransactionObserver >)observer_
+{
+	if (self = [super init])
+	{
+		observer = [observer_ retain];
+	}
+	return self;
+}
+
+-(void)dealloc
+{
+	[observer release];
+	[super dealloc];
+}
+
+
 -(void)addPayment:(id)arg
 {
 	ENSURE_SINGLE_ARG_OR_NIL(arg, Payment);
@@ -21,5 +37,9 @@
 	[[SKPaymentQueue defaultQueue] addPayment:payment.payment];
 }
 
+-(id)canMakePayments
+{
+	return NUMBOOL([SKPaymentQueue canMakePayments]);
+}
 
 @end

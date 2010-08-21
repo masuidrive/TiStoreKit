@@ -7,7 +7,7 @@
 #import "TiModule.h"
 #import "PaymentQueue.h"
 
-@interface JpMasuidriveTiStorekitModule : TiModule 
+@interface JpMasuidriveTiStorekitModule : TiModule <SKPaymentTransactionObserver>
 {
 	PaymentQueue* paymentQueue;
 }

@@ -5,9 +5,13 @@
  * Please see the LICENSE included with this distribution for details.
  */
 #import "TiProxy.h"
+#import <StoreKit/StoreKit.h>
 
 @interface PaymentQueue : TiProxy {
+	id <SKPaymentTransactionObserver> observer;
 }
 -(void)addPayment:(id)arg;
+-(id)canMakePayments;
 
+-(id)initWithTransactionObserver:(id < SKPaymentTransactionObserver >)observer;
 @end
