@@ -19,12 +19,14 @@
 	if (self = [super init])
 	{
 		observer = [observer_ retain];
+		[[SKPaymentQueue defaultQueue] addTransactionObserver:observer];
 	}
 	return self;
 }
 
 -(void)dealloc
 {
+	[[SKPaymentQueue defaultQueue] removeTransactionObserver:observer];
 	[observer release];
 	[super dealloc];
 }

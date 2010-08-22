@@ -92,8 +92,32 @@
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-	NSLog(@"> paymentQueue:updatedTransactions:transactions");
+	NSLog(@"> paymentQueue:updatedTransactions:transactions ??");
 	// TODO
+	for (SKPaymentTransaction *transaction in transactions) {
+		NSDictionary* evt = [NSDictionary dictionaryWithObject:transaction forKey:@"transaction"];
+		
+		switch (transaction.transactionState) {
+			case SKPaymentTransactionStatePurchasing:
+				[self fireEvent:@"puchasing" withObject:evt];
+				break;
+			
+			case SKPaymentTransactionStatePurchased:
+				[self fireEvent:@"puchased" withObject:evt];
+				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+				break;
+				
+			case SKPaymentTransactionStateFailed:
+				[self fireEvent:@"failed" withObject:evt];
+				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+				break;
+				
+			case SKPaymentTransactionStateRestored:
+				[self fireEvent:@"restored" withObject:evt];
+				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+				break;
+		}
+	}
 }
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
