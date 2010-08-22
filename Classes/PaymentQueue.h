@@ -7,11 +7,11 @@
 #import "TiProxy.h"
 #import <StoreKit/StoreKit.h>
 
-@interface PaymentQueue : TiProxy {
-	id <SKPaymentTransactionObserver> observer;
+@interface PaymentQueue : TiProxy<SKPaymentTransactionObserver> {
+	SKPaymentQueue* queue;
 }
 -(void)addPayment:(id)arg;
 -(id)canMakePayments;
 
--(id)initWithTransactionObserver:(id < SKPaymentTransactionObserver >)observer;
+-(id)_initWithPageContext:(id<TiEvaluator>)context queue:(SKPaymentQueue*)queue_;
 @end

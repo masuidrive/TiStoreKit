@@ -15,22 +15,66 @@
 
 @implementation PaymentQueue
 
--(id)initWithTransactionObserver:(id < SKPaymentTransactionObserver >)observer_
+-(id)_initWithPageContext:(id<TiEvaluator>)context
+				   queue:(SKPaymentQueue*)queue_
 {
-	if (self = [super init])
-	{
-		observer = [observer_ retain];
-		[[SKPaymentQueue defaultQueue] addTransactionObserver:observer];
+	if (self = [super _initWithPageContext:context]) {
+		queue = [queue_ retain];
+		[queue addTransactionObserver:self];
 	}
 	return self;
 }
 
 -(void)dealloc
 {
-	[[SKPaymentQueue defaultQueue] removeTransactionObserver:observer];
-	[observer release];
+	[queue removeTransactionObserver:self];
+	[queue release];
 	[super dealloc];
 }
+
+
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+{
+	for (SKPaymentTransaction *transaction in transactions) {
+		PaymentTransaction* t = [[[PaymentTransaction alloc] _initWithPageContext:[self pageContext] transaction:transaction] autorelease];
+		NSDictionary* evt = [NSDictionary dictionaryWithObject:t forKey:@"transaction"];
+		
+		switch (transaction.transactionState) {
+			case SKPaymentTransactionStatePurchasing:
+				[self fireEvent:@"puchasing" withObject:evt];
+				break;
+				
+			case SKPaymentTransactionStatePurchased:
+				[self fireEvent:@"puchased" withObject:evt];
+				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+				break;
+				
+			case SKPaymentTransactionStateFailed:
+				[self fireEvent:@"failed" withObject:evt];
+				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+				break;
+				
+			case SKPaymentTransactionStateRestored:
+				[self fireEvent:@"restored" withObject:evt];
+				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+				break;
+		}
+	}
+}
+
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+	NSLog(@"> paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue");
+}
+
+
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
+{
+	NSLog(@"> paymentQueue:restoreCompletedTransactionsFailedWithError:");
+}
+
+
+#pragma Public API
 
 -(void)addPayment:(id)arg
 {

@@ -57,7 +57,7 @@
 -(void)dealloc
 {
 	// release any resources that have been retained by the module
-	[paymentQueue release];
+	[defaultPaymentQueue release];
 	[productRequestCallback release];
 	[super dealloc];
 }
@@ -94,46 +94,6 @@
 
 
 #pragma mark Delegates
-
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
-{
-	for (SKPaymentTransaction *transaction in transactions) {
-		PaymentTransaction* t = [[[PaymentTransaction alloc] _initWithPageContext:[self pageContext] transaction:transaction] autorelease];
-		NSDictionary* evt = [NSDictionary dictionaryWithObject:t forKey:@"transaction"];
-		
-		switch (transaction.transactionState) {
-			case SKPaymentTransactionStatePurchasing:
-				[self fireEvent:@"puchasing" withObject:evt];
-				break;
-			
-			case SKPaymentTransactionStatePurchased:
-				[self fireEvent:@"puchased" withObject:evt];
-				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-				break;
-				
-			case SKPaymentTransactionStateFailed:
-				[self fireEvent:@"failed" withObject:evt];
-				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-				break;
-				
-			case SKPaymentTransactionStateRestored:
-				[self fireEvent:@"restored" withObject:evt];
-				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-				break;
-		}
-	}
-}
-
-- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
-{
-	NSLog(@"> paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue");
-}
-
-
-- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
-{
-	NSLog(@"> paymentQueue:restoreCompletedTransactionsFailedWithError:");
-}
 
 - (void)productsRequest:(SKProductsRequest *)request
 	 didReceiveResponse:(SKProductsResponse *)response
@@ -185,12 +145,12 @@
 	[productRequestCallback addObject:[NSArray arrayWithObjects: req, callback, nil]];
 }
 
--(id)paymentQueue
+-(id)defaultPaymentQueue
 {
-	if(paymentQueue==nil) {
-		paymentQueue = [[PaymentQueue alloc] initWithTransactionObserver:self];
+	if(defaultPaymentQueue==nil) {
+		defaultPaymentQueue = [[PaymentQueue alloc] _initWithPageContext:[self pageContext] queue:[SKPaymentQueue defaultQueue]];
 	}
-	return paymentQueue;
+	return defaultPaymentQueue;
 }
 
 @end
