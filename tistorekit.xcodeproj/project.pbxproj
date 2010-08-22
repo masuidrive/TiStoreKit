@@ -29,6 +29,8 @@
 		5951574F12204BA50059B0F3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5951574E12204BA50059B0F3 /* StoreKit.framework */; };
 		598C92281221151B00DD87E6 /* PaymentTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 598C92261221151B00DD87E6 /* PaymentTransaction.h */; };
 		598C92291221151B00DD87E6 /* PaymentTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 598C92271221151B00DD87E6 /* PaymentTransaction.m */; };
+		598C92FB1221C9F900DD87E6 /* Product.h in Headers */ = {isa = PBXBuildFile; fileRef = 598C92F91221C9F900DD87E6 /* Product.h */; };
+		598C92FC1221C9F900DD87E6 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 598C92FA1221C9F900DD87E6 /* Product.m */; };
 		59DCC21912205B87007EDC2E /* Payment.h in Headers */ = {isa = PBXBuildFile; fileRef = 59DCC21712205B87007EDC2E /* Payment.h */; };
 		59DCC21A12205B87007EDC2E /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = 59DCC21812205B87007EDC2E /* Payment.m */; };
 		59DCC24A1220719B007EDC2E /* PaymentQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 59DCC2481220719B007EDC2E /* PaymentQueue.h */; };
@@ -56,6 +58,8 @@
 		5951574E12204BA50059B0F3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		598C92261221151B00DD87E6 /* PaymentTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaymentTransaction.h; path = Classes/PaymentTransaction.h; sourceTree = "<group>"; };
 		598C92271221151B00DD87E6 /* PaymentTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaymentTransaction.m; path = Classes/PaymentTransaction.m; sourceTree = "<group>"; };
+		598C92F91221C9F900DD87E6 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Product.h; path = Classes/Product.h; sourceTree = "<group>"; };
+		598C92FA1221C9F900DD87E6 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Product.m; path = Classes/Product.m; sourceTree = "<group>"; };
 		59DCC21712205B87007EDC2E /* Payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Payment.h; path = Classes/Payment.h; sourceTree = "<group>"; };
 		59DCC21812205B87007EDC2E /* Payment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Payment.m; path = Classes/Payment.m; sourceTree = "<group>"; };
 		59DCC2481220719B007EDC2E /* PaymentQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaymentQueue.h; path = Classes/PaymentQueue.h; sourceTree = "<group>"; };
@@ -109,12 +113,14 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				598C92261221151B00DD87E6 /* PaymentTransaction.h */,
-				598C92271221151B00DD87E6 /* PaymentTransaction.m */,
+				598C92F91221C9F900DD87E6 /* Product.h */,
+				598C92FA1221C9F900DD87E6 /* Product.m */,
 				59DCC21712205B87007EDC2E /* Payment.h */,
 				59DCC21812205B87007EDC2E /* Payment.m */,
 				59DCC2481220719B007EDC2E /* PaymentQueue.h */,
 				59DCC2491220719B007EDC2E /* PaymentQueue.m */,
+				598C92261221151B00DD87E6 /* PaymentTransaction.h */,
+				598C92271221151B00DD87E6 /* PaymentTransaction.m */,
 				24DE9E0F11C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.h */,
 				24DE9E1011C5FE74003F90F6 /* JpMasuidriveTiStorekitModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* JpMasuidriveTiStorekitModule.h */,
@@ -145,6 +151,7 @@
 				59DCC21912205B87007EDC2E /* Payment.h in Headers */,
 				59DCC24A1220719B007EDC2E /* PaymentQueue.h in Headers */,
 				598C92281221151B00DD87E6 /* PaymentTransaction.h in Headers */,
+				598C92FB1221C9F900DD87E6 /* Product.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +220,7 @@
 				59DCC21A12205B87007EDC2E /* Payment.m in Sources */,
 				59DCC24B1220719B007EDC2E /* PaymentQueue.m in Sources */,
 				598C92291221151B00DD87E6 /* PaymentTransaction.m in Sources */,
+				598C92FC1221C9F900DD87E6 /* Product.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

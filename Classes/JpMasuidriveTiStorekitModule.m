@@ -11,6 +11,8 @@
 
 #import "Payment.h"
 #import "PaymentTransaction.h"
+#import "Product.h"
+
 
 @implementation JpMasuidriveTiStorekitModule
 
@@ -35,6 +37,7 @@
 	// this method is called when the module is first loaded
 	// you *must* call the superclass
 	[super startup];
+	productRequestCallback = [NSMutableArray array];
 	
 	NSLog(@"[INFO] %@ loaded",self);
 }
@@ -55,6 +58,7 @@
 {
 	// release any resources that have been retained by the module
 	[paymentQueue release];
+	[productRequestCallback release];
 	[super dealloc];
 }
 
@@ -96,7 +100,6 @@
 	for (SKPaymentTransaction *transaction in transactions) {
 		PaymentTransaction* t = [[[PaymentTransaction alloc] _initWithPageContext:[self pageContext] transaction:transaction] autorelease];
 		NSDictionary* evt = [NSDictionary dictionaryWithObject:t forKey:@"transaction"];
-		NSLog(@"evt=%@", t);
 		
 		switch (transaction.transactionState) {
 			case SKPaymentTransactionStatePurchasing:
@@ -132,11 +135,54 @@
 	NSLog(@"> paymentQueue:restoreCompletedTransactionsFailedWithError:");
 }
 
+- (void)productsRequest:(SKProductsRequest *)request
+	 didReceiveResponse:(SKProductsResponse *)response
+{
+	KrollCallback* callback = nil;
+	for(NSArray* line in productRequestCallback) {
+		if([line objectAtIndex:0] == request) {
+			callback = [[[line objectAtIndex:1] retain] autorelease];
+			[productRequestCallback removeObject:line];
+			break;
+		}
+	}
+	if(callback) {	   
+		NSMutableArray* products = [NSMutableArray array];
+		for(SKProduct* product in response.products) {
+			[products addObject:[[Product alloc] _initWithPageContext:[self pageContext] product:product]];
+		}
+		[callback call:[NSArray arrayWithObjects:products, response.invalidProductIdentifiers, nil] thisObject:self];
+	}
+}
+
 #pragma Public APIs
 
 -(id)createPayment:(id)args
 {
 	return [[[Payment alloc] _initWithPageContext:[self executionContext] args:args] autorelease];
+}
+
+-(void)findProducts:(id)args
+{
+	ENSURE_ARG_COUNT(args, 2);
+	id arg0 = [args objectAtIndex:0];
+	NSSet* productIds = nil;
+	if([arg0 isKindOfClass:[NSString class]]) {
+		productIds = [NSSet setWithObject:arg0];
+	}
+	else if([arg0 isKindOfClass:[NSArray class]]) {
+		productIds = [NSSet setWithArray:arg0];
+	}
+	else {
+		[self throwException:TiExceptionInvalidType subreason:[NSString stringWithFormat:@"expected: Array or Stinrg, was: %@",[arg0 class]] location:CODELOCATION]; \
+	}
+	
+	id callback = [args objectAtIndex:1];
+	ENSURE_TYPE(callback, KrollCallback);
+	SKProductsRequest *req = [[[SKProductsRequest alloc] initWithProductIdentifiers:productIds] autorelease];
+	req.delegate = self;
+	[req start];
+	[productRequestCallback addObject:[NSArray arrayWithObjects: req, callback, nil]];
 }
 
 -(id)paymentQueue

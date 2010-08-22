@@ -7,9 +7,11 @@
 #import "TiModule.h"
 #import "PaymentQueue.h"
 
-@interface JpMasuidriveTiStorekitModule : TiModule <SKPaymentTransactionObserver>
+@interface JpMasuidriveTiStorekitModule : TiModule <SKPaymentTransactionObserver, SKProductsRequestDelegate>
 {
+@private
 	PaymentQueue* paymentQueue;
+	NSMutableArray* productRequestCallback;
 }
 
 @end
