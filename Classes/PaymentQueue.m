@@ -6,6 +6,7 @@
  */
 
 #import "PaymentQueue.h"
+#import "PaymentTransaction.h"
 #import "Payment.h"
 #import "TiUtils.h"
 
@@ -31,12 +32,23 @@
 	[super dealloc];
 }
 
-
 -(void)addPayment:(id)arg
 {
 	ENSURE_SINGLE_ARG_OR_NIL(arg, Payment);
 	Payment* payment = (Payment*)arg;
 	[[SKPaymentQueue defaultQueue] addPayment:payment.payment];
+}
+
+-(void)finishTransaction:(id)arg
+{
+	ENSURE_SINGLE_ARG_OR_NIL(arg, PaymentTransaction);
+	PaymentTransaction* pt = arg;
+	[[SKPaymentQueue defaultQueue] finishTransaction:pt.transaction];
+}
+
+-(void)restoreCompletedTransactions:(id)arg
+{
+	[[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 }
 
 -(id)canMakePayments

@@ -12,7 +12,7 @@
 #import "TiUtils.h"
 
 @implementation PaymentTransaction
-
+@synthesize transaction;
 
 -(id)_initWithPageContext:(id<TiEvaluator>)context
 			  transaction:(SKPaymentTransaction*)transaction_

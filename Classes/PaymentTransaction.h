@@ -12,6 +12,7 @@
 @private
 	SKPaymentTransaction* transaction;
 }
+@property (nonatomic, retain) SKPaymentTransaction* transaction;
 
 -(id)_initWithPageContext:(id<TiEvaluator>)context transaction:(SKPaymentTransaction*)transaction_;
 
