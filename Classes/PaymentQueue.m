@@ -32,7 +32,6 @@
 	[super dealloc];
 }
 
-
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
 	for (SKPaymentTransaction *transaction in transactions) {
@@ -64,13 +63,22 @@
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
-	NSLog(@"> paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue");
+	[self fireEvent:@"restoreFinished" withObject:nil];
 }
 
+#define SETOBJ(dict, obj, key) if(obj){[dict setObject:obj forKey:key];};
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
 {
-	NSLog(@"> paymentQueue:restoreCompletedTransactionsFailedWithError:");
+	NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithObjectsAndKeys:NUMINT(error.code), @"code",nil];
+	SETOBJ(ret, error.domain, @"domain");
+	SETOBJ(ret, error.helpAnchor, @"helpAnchor");
+	SETOBJ(ret, error.localizedDescription, @"localizedDescription");
+	SETOBJ(ret, error.localizedFailureReason, @"localizedFailureReason");
+	SETOBJ(ret, error.localizedRecoveryOptions, @"localizedRecoveryOptions");
+	SETOBJ(ret, error.localizedRecoverySuggestion, @"localizedRecoverySuggestion");
+	
+	[self fireEvent:@"restoreFailed" withObject:[NSDictionary dictionaryWithObjectsAndKeys:ret, @"error", nil]];
 }
 
 
