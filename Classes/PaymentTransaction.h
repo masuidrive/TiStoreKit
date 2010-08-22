@@ -7,13 +7,12 @@
 #import "TiProxy.h"
 #import <StoreKit/StoreKit.h>
 
-@interface Payment : TiProxy {
-	
-@private
-	SKMutablePayment* payment;
-}
-@property (nonatomic, retain) SKMutablePayment* payment;
+@interface PaymentTransaction : TiProxy {
 
--(id)_initWithPageContext:(id<TiEvaluator>)context payment:(SKPayment*)payment_;
+@private
+	SKPaymentTransaction* transaction;
+}
+
+-(id)_initWithPageContext:(id<TiEvaluator>)context transaction:(SKPaymentTransaction*)transaction_;
 
 @end

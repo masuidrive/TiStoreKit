@@ -10,6 +10,7 @@
 #import "TiUtils.h"
 
 #import "Payment.h"
+#import "PaymentTransaction.h"
 
 @implementation JpMasuidriveTiStorekitModule
 
@@ -92,10 +93,10 @@
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-	NSLog(@"> paymentQueue:updatedTransactions:transactions ??");
-	// TODO
 	for (SKPaymentTransaction *transaction in transactions) {
-		NSDictionary* evt = [NSDictionary dictionaryWithObject:transaction forKey:@"transaction"];
+		PaymentTransaction* t = [[[PaymentTransaction alloc] _initWithPageContext:[self pageContext] transaction:transaction] autorelease];
+		NSDictionary* evt = [NSDictionary dictionaryWithObject:t forKey:@"transaction"];
+		NSLog(@"evt=%@", t);
 		
 		switch (transaction.transactionState) {
 			case SKPaymentTransactionStatePurchasing:

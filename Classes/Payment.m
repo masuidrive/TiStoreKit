@@ -14,6 +14,15 @@
 @synthesize payment;
 
 
+-(id)_initWithPageContext:(id<TiEvaluator>)context payment:(SKPayment*)payment_
+{
+	if (self = [super _initWithPageContext:context]) {
+		self.payment.productIdentifier = payment_.productIdentifier;
+		self.payment.quantity = payment_.quantity;
+	}
+	return self;
+}
+
 - (SKPayment*)payment
 {
 	if(payment==nil) {
@@ -29,8 +38,19 @@
 
 - (void)setProduct:(id)arg
 {
-	ENSURE_SINGLE_ARG_OR_NIL(arg, NSString);
+	ENSURE_STRING_OR_NIL(arg);
 	self.payment.productIdentifier = arg;
+}
+
+- (id)quantity
+{
+	return NUMINT(self.payment.quantity);
+}
+
+- (void)setQuantity:(id)arg
+{
+	ENSURE_SINGLE_ARG(arg, NSNumber);
+	self.payment.quantity = [TiUtils intValue:arg];
 }
 
 
