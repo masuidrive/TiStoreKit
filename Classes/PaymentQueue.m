@@ -40,11 +40,11 @@
 		
 		switch (transaction.transactionState) {
 			case SKPaymentTransactionStatePurchasing:
-				[self fireEvent:@"puchasing" withObject:evt];
+				[self fireEvent:@"purchasing" withObject:evt];
 				break;
 				
 			case SKPaymentTransactionStatePurchased:
-				[self fireEvent:@"puchased" withObject:evt];
+				[self fireEvent:@"purchased" withObject:evt];
 				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 				break;
 				
@@ -73,6 +73,7 @@
 	NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithObjectsAndKeys:NUMINT(error.code), @"code",nil];
 	SETOBJ(ret, error.domain, @"domain");
 	SETOBJ(ret, error.helpAnchor, @"helpAnchor");
+	SETOBJ(ret, error.localizedDescription, @"message");
 	SETOBJ(ret, error.localizedDescription, @"localizedDescription");
 	SETOBJ(ret, error.localizedFailureReason, @"localizedFailureReason");
 	SETOBJ(ret, error.localizedRecoveryOptions, @"localizedRecoveryOptions");

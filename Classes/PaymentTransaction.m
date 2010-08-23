@@ -53,6 +53,7 @@
 		NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithObjectsAndKeys:NUMINT(e.code), @"code",nil];
 		SETOBJ(ret, e.domain, @"domain");
 		SETOBJ(ret, e.helpAnchor, @"helpAnchor");
+		SETOBJ(ret, e.localizedDescription, @"message");
 		SETOBJ(ret, e.localizedDescription, @"localizedDescription");
 		SETOBJ(ret, e.localizedFailureReason, @"localizedFailureReason");
 		SETOBJ(ret, e.localizedRecoveryOptions, @"localizedRecoveryOptions");
