@@ -36,11 +36,20 @@ var PaymentTestSuite = (function() {
     return {
 	suiteName: "Payment Test Suite",
 	testCanMakePayments: function() {
-	    jsUnity.assertions.assertEqual(false, StoreKit.paymentQueue.canMakePayments);
+	    jsUnity.assertions.assertEqual(true, StoreKit.defaultPaymentQueue.canMakePayments);
 	},
 	testCreatePayment: function() {
 	    var payment = StoreKit.createPayment();
 	    jsUnity.assertions.assertEqual("[object Payment]", payment.toString());
+	},
+	testFindProduct: function() {
+	    StoreKit.findProducts("jp.masuidrive.ti.storekit.example1", function(products, invalid){
+		for(i in products) {
+		    var p = products[i];
+		    jsUnity.log(p.productIdentifier);
+		}
+		jsUnity.log(invalid);
+	    });
 	},
 	testPaymentProduct: function() {
 	    var payment = StoreKit.createPayment({product: "jp.masuidrive.ti.storekit.example1", quantity: 10});
@@ -55,9 +64,36 @@ var PaymentTestSuite = (function() {
 	},
 	testPaymentAddQueue: function() {
 	    var payment = StoreKit.createPayment();
-	    payment.product = "jp.masuidrive.ti.storekit.example2";
-	    payment.quantity = 12;
-	    StoreKit.paymentQueue.addPayment(payment);
+	    StoreKit.defaultPaymentQueue.addEventListener("restoreFinished", function(e) {
+		jsUnity.log(">>restoreFinished");
+		jsUnity.log(e);
+	    });
+	    StoreKit.defaultPaymentQueue.addEventListener("restoreFailed", function(e) {
+		jsUnity.log(">>restoreFailed");
+		jsUnity.log(e);
+	    });
+
+	    StoreKit.defaultPaymentQueue.addEventListener("purchasing", function(e) {
+		jsUnity.log(">>purchasing");
+		jsUnity.log(e.transaction);
+	    });
+	    
+	    StoreKit.defaultPaymentQueue.addEventListener("purchased", function(e) {
+		jsUnity.log(">>purchased");
+		jsUnity.log(e.transaction);
+		jsUnity.log(e.transaction.identifier);
+		jsUnity.log(e.transaction.receipt);
+		StoreKit.defaultPaymentQueue.finishTransaction(e.transaction);
+	    });
+	    
+	    StoreKit.defaultPaymentQueue.addEventListener("failed", function(e) {
+		jsUnity.log(">>failed !!!");
+		jsUnity.log(e.transaction.error.message);
+		StoreKit.defaultPaymentQueue.finishTransaction(e.transaction);
+	    });
+	    payment.product = "jp.masuidrive.ti.storekit.example1";
+	    payment.quantity = 10;
+	    StoreKit.defaultPaymentQueue.addPayment(payment);
 	}
     };
 })();
