@@ -26,12 +26,12 @@
 	[super dealloc];
 }
 
--(id)productIdentifier
+-(id)id
 {
 	return [[[product productIdentifier] retain] autorelease];
 }
 
--(id)localizedDescription
+-(id)description
 {
 	return [[[product localizedDescription] retain] autorelease];
 }
@@ -41,7 +41,7 @@
 	return [[[product price] retain] autorelease];
 }
 
--(id)localizedTitle
+-(id)title
 {
 	return [[[product localizedTitle] retain] autorelease];
 }

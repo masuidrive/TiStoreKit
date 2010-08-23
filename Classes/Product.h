@@ -14,6 +14,6 @@
 }
 
 -(id)_initWithPageContext:(id<TiEvaluator>)context product:(SKProduct*)product_;
-
+-(id)id;
 
 @end

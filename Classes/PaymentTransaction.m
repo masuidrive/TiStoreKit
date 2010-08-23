@@ -86,7 +86,7 @@
 	return [transaction transactionDate];
 }
 
--(id)identifier
+-(id)id
 {
 	return [transaction transactionIdentifier];
 }

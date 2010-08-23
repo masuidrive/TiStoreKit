@@ -6,7 +6,7 @@
  */
 
 #import "Payment.h"
-
+#import "Product.h"
 #import "TiUtils.h"
 
 @implementation Payment
@@ -39,7 +39,12 @@
 - (void)setProduct:(id)arg
 {
 	ENSURE_STRING_OR_NIL(arg);
-	self.payment.productIdentifier = arg;
+	if ([arg isKindOfClass:[Product class]]) {
+		self.payment.productIdentifier = [(Product*)arg id];
+	}
+	else {
+		self.payment.productIdentifier = arg;
+	}
 }
 
 - (id)quantity

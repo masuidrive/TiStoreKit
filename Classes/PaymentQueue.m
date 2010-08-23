@@ -70,6 +70,15 @@
 	}
 }
 
+- (void)paymentQueue:(SKPaymentQueue *)queue
+ removedTransactions:(NSArray *)transactions
+{
+	for (SKPaymentTransaction *transaction in transactions) {
+		PaymentTransaction* t = [[[PaymentTransaction alloc] _initWithPageContext:[self pageContext] transaction:transaction] autorelease];
+		[self fireEvent:@"removed" withObject:[NSDictionary dictionaryWithObject:t forKey:@"transaction"]];
+	}
+}
+
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
 	[self fireEvent:@"restoreFinished" withObject:nil];
