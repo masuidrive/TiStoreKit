@@ -117,9 +117,19 @@
 
 #pragma Public APIs
 
+-(id)canMakePayments
+{
+	return NUMBOOL([SKPaymentQueue canMakePayments]);
+}
+
 -(id)createPayment:(id)args
 {
 	return [[[Payment alloc] _initWithPageContext:[self executionContext] args:args] autorelease];
+}
+
+-(id)createPaymentQueue:(id)args
+{
+	return [[[PaymentQueue alloc] _initWithPageContext:[self executionContext] args:args] autorelease];
 }
 
 -(void)findProducts:(id)args

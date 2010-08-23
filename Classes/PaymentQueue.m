@@ -16,7 +16,7 @@
 @implementation PaymentQueue
 
 -(id)_initWithPageContext:(id<TiEvaluator>)context
-				   queue:(SKPaymentQueue*)queue_
+				    queue:(SKPaymentQueue*)queue_
 {
 	if (self = [super _initWithPageContext:context]) {
 		queue = [queue_ retain];
@@ -32,6 +32,15 @@
 	[super dealloc];
 }
 
+- (SKPaymentQueue*)queue
+{
+	if(queue==nil) {
+		queue = [[[SKPaymentQueue alloc] init] autorelease];
+		[queue addTransactionObserver:self];
+	}
+	return [[queue retain] autorelease];
+}
+
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
 	for (SKPaymentTransaction *transaction in transactions) {
@@ -45,17 +54,17 @@
 				
 			case SKPaymentTransactionStatePurchased:
 				[self fireEvent:@"purchased" withObject:evt];
-				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+				[[self queue] finishTransaction:transaction];
 				break;
 				
 			case SKPaymentTransactionStateFailed:
 				[self fireEvent:@"failed" withObject:evt];
-				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+				[[self queue] finishTransaction:transaction];
 				break;
 				
 			case SKPaymentTransactionStateRestored:
 				[self fireEvent:@"restored" withObject:evt];
-				[[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+				[[self queue] finishTransaction:transaction];
 				break;
 		}
 	}
@@ -89,24 +98,19 @@
 {
 	ENSURE_SINGLE_ARG_OR_NIL(arg, Payment);
 	Payment* payment = (Payment*)arg;
-	[[SKPaymentQueue defaultQueue] addPayment:payment.payment];
+	[[self queue] addPayment:payment.payment];
 }
 
 -(void)finishTransaction:(id)arg
 {
 	ENSURE_SINGLE_ARG_OR_NIL(arg, PaymentTransaction);
 	PaymentTransaction* pt = arg;
-	[[SKPaymentQueue defaultQueue] finishTransaction:pt.transaction];
+	[[self queue] finishTransaction:pt.transaction];
 }
 
 -(void)restoreCompletedTransactions:(id)arg
 {
-	[[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-}
-
--(id)canMakePayments
-{
-	return NUMBOOL([SKPaymentQueue canMakePayments]);
+	[[self queue] restoreCompletedTransactions];
 }
 
 @end

@@ -36,7 +36,7 @@ var PaymentTestSuite = (function() {
     return {
 	suiteName: "Payment Test Suite",
 	testCanMakePayments: function() {
-	    jsUnity.assertions.assertEqual(true, StoreKit.defaultPaymentQueue.canMakePayments);
+	    jsUnity.assertions.assertEqual(true, StoreKit.canMakePayments);
 	},
 	testCreatePayment: function() {
 	    var payment = StoreKit.createPayment();

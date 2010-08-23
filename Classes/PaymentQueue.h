@@ -11,7 +11,6 @@
 	SKPaymentQueue* queue;
 }
 -(void)addPayment:(id)arg;
--(id)canMakePayments;
 
 -(id)_initWithPageContext:(id<TiEvaluator>)context queue:(SKPaymentQueue*)queue_;
 @end
